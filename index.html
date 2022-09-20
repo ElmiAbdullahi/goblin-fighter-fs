@@ -1,39 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <!-- metadata -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- title and favicon -->
+        <title>Web App</title>
+        <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
 
-    <!-- title and favicon -->
-    <title>Web App</title>
-    <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
+        <!-- js -->
+        <script type="module" src="app.js"></script>
 
-    <!-- js -->
-    <script type="module" src="app.js"></script>
+        <!-- fonts -->
+        <!-- see https://fonts.google.com/ -->
 
-    <!-- fonts -->
-    <!-- see https://fonts.google.com/ -->
+        <!-- css -->
+        <link rel="stylesheet" href="styles/reset.css" />
+        <link rel="stylesheet" href="styles/global.css" />
+        <!-- add link for page specific css -->
+    </head>
 
-    <!-- css -->
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/global.css" />
-    <!-- add link for page specific css -->
+    <body>
+        <header>
+            <img class="logo" src="assets/html_css_js.png" alt="logo" />
+            <h1>Web App</h1>
+        </header>
 
-</head>
+        <main>
+            <section class="banner" id="scoreboard">You defeated 2 goblin(s)</section>
+            <section class="banner" id="result-display">
+                You hit Tech and did 3 in damage. You hit hamza and did 2 in damage
+            </section>
 
-<body>
-    <header>
-        <img class="logo" src="assets/html_css_js.png" alt="logo">
-        <h1>Web App</h1>
-    </header>
+            <section class="player-card">
+                <p id="player-hp" class="stat">16</p>
+                <img src="./assets/superhero.png" height="200px" alt="goblin-1" />
+            </section>
 
-    <main>
+            <section class="goblins-section">
+                <form id="add-goblin-form">
+                    <label>
+                        <div class="controls">
+                            <input name required="name" />
+                            <button>Add Goblin</button>
+                        </div>
+                    </label>
+                </form>
 
-    </main>
+                <ul id="goblin-list">
+                    <li class="goblin-card"></li>
+                    <li class="goblin-card"></li>
+                    <li class="goblin-card"></li>
+                </ul>
 
-</body>
+                <button id="remove-dead-goblins">Remove dead goblins</button>
+            </section>
 
+            <section id="goblins-section">
+                <img src="./assets/goblin.png" height="150px" alt="goblin-1" />
+                <img src="./assets/goblin (2).png" height="150px" alt="goblin-2" />
+                <img src="./assets/goblin (3).png" height="150px" alt="goblin-3" />
+            </section>
+        </main>
+    </body>
 </html>
