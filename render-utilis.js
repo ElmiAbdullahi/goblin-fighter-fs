@@ -9,6 +9,7 @@ export function renderGoblin(goblin) {
 
     const imgEl = document.createElement('img');
     imgEl.src = `/assets/${goblin.type}.png`;
+    imgEl.classList.add('img');
 
     goblinContainer.append(nameEl, hpEl, imgEl);
 
