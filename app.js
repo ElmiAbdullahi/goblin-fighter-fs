@@ -2,8 +2,6 @@
 import { renderGoblin } from './render-utilis.js';
 
 /* Get DOM Elements */
-// const scoreboardSection = document.getElementById('scoreboard');
-// const resultSection = document.getElementById('result-display');
 
 const goblinArea = document.getElementById('goblin-area');
 
@@ -26,6 +24,8 @@ let goblins = [
     { name: 'Tech', HP: 9, type: 'brute' },
 ];
 
+let defeated = 0;
+
 /* Events */
 
 /* Display Functions */
@@ -33,7 +33,7 @@ function displayDamage() {
     damageDone.textContent = `you hit ${goblins.name} and did ${0} damage`;
 }
 function displayDefeatedGoblin() {
-    defeatGoblin.textContent = `you have defeated ${0} goblins`;
+    defeatGoblin.textContent = `you have defeated ${defeated} goblins`;
 }
 
 function displayGoblins() {
