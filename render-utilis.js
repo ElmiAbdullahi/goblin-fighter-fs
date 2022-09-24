@@ -8,8 +8,12 @@ export function renderGoblin(goblin) {
     hpEl.textContent = goblin.HP;
 
     const imgEl = document.createElement('img');
-    imgEl.src = `/assets/${goblin.type}.png`;
     imgEl.classList.add('img');
+    if (goblin.HP < 1) {
+        imgEl.src = '';
+    } else {
+        imgEl.src = `/assets/${goblin.type}.png`;
+    }
 
     goblinContainer.append(nameEl, hpEl, imgEl);
 
