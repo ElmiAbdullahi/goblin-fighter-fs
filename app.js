@@ -12,6 +12,8 @@ const playerHP = document.getElementById('player-hp');
 const goblinList = document.getElementById('goblin-list');
 const removeDeadGoblinsBtn = document.getElementById('remove-dead-goblins');
 
+const resultDisplay = document.getElementById('result-display');
+
 const defeatGoblin = document.getElementById('defeated-goblins');
 const damageDone = document.getElementById('damage-done');
 
@@ -64,6 +66,9 @@ function displayDefeatedGoblin() {
     defeatGoblin.textContent = `you have defeated ${defeated} goblins`;
 }
 
+function displayResult() {
+    resultDisplay.textContent = result;
+}
 function displayGoblins() {
     goblinList.innerHTML = '';
 
@@ -74,7 +79,7 @@ function displayGoblins() {
         goblinEl.addEventListener('click', () => {
             if (goblin.HP < 1) {
                 result = `You're hitting a dead goblin. That's just wrong`;
-                // displayResult();
+                displayResult();
             }
             const playerDamage = getRandomItem(playerDamages);
             const goblinDamage = getRandomItem(goblinDamages);
@@ -98,7 +103,8 @@ function displayGoblins() {
                 defeated++;
                 // displayScoreboard();
             }
-            // displayResult();
+            displayResult();
+            displayGoblins();
         });
     }
 }
