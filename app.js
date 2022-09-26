@@ -12,6 +12,8 @@ const playerHP = document.getElementById('player-hp');
 const goblinList = document.getElementById('goblin-list');
 const removeDeadGoblinsBtn = document.getElementById('remove-dead-goblins');
 
+// const formData = document.getElementById('form-data');
+
 const resultDisplay = document.getElementById('result-display');
 const playerCardImg = document.getElementById('display-player');
 
@@ -24,9 +26,9 @@ let result = '';
 let player = { HP: 23 };
 
 let goblins = [
-    { name: 'Lex', HP: 7, type: 'ghoul' },
-    { name: 'Hamza', HP: 8, type: 'hitter' },
-    { name: 'Tech', HP: 9, type: 'brute' },
+    { name: 'Lex', HP: 7, type: 'red' },
+    { name: 'Hamza', HP: 8, type: 'green' },
+    { name: 'Tech', HP: 9, type: 'blue' },
 ];
 
 let defeated = 0;
@@ -53,9 +55,28 @@ const yellow = {
 
 const goblinDamages = [0, 0, 0, 1, 2, 3, 3, 3, 3, 4, 4, 5];
 const playerDamages = [0, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 5];
-// const villianTypes [green, green, red, red, red, red, red, blue, blue, yellow];
+const villianTypes = [green, green, red, red, red, red, red, blue, blue, yellow];
 
 /* Display Functions */
+addGoblinForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(addGoblinForm);
+    const villianType = getRandomItem(villianTypes);
+
+    const goblin = {
+        name: formData.get('name'),
+        type: villianType.type,
+        HP: villianType.HP,
+    };
+    goblins.push(goblin);
+
+    result = `${goblin.name} the ${goblin.type} has entered the battle`;
+    displayGoblins();
+    displayResult();
+
+    addGoblinForm.reset();
+});
+
 function displayDamage() {
     if (goblins.name) {
         damageDone.textContent = `you hit ${goblins.name} and did ${damageDone} damage`;

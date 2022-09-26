@@ -12,7 +12,7 @@ export function renderGoblin(goblin) {
     if (goblin.HP < 1) {
         imgEl.src = '/assets/tombstone.png';
     } else {
-        imgEl.src = `/assets/${goblin.type}.png`;
+        imgEl.src = '/assets/' + goblin.type + '.png';
     }
 
     goblinContainer.append(nameEl, hpEl, imgEl);
