@@ -17,10 +17,11 @@ const damageDone = document.getElementById('damage-done');
 
 /* State */
 let message = '';
+let result = '';
 let player = { HP: 16 };
 
 let goblins = [
-    { name: 'Lex', HP: 0, type: 'ghoul' },
+    { name: 'Lex', HP: 7, type: 'ghoul' },
     { name: 'Hamza', HP: 8, type: 'hitter' },
     { name: 'Tech', HP: 9, type: 'brute' },
 ];
@@ -29,7 +30,27 @@ let defeated = 0;
 // let damageTaken = 0;
 
 /* Events */
-// const damageTaken = [0, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 5];
+
+const green = {
+    type: 'green',
+    HP: 4,
+};
+const blue = {
+    type: 'blue',
+    HP: 5,
+};
+const red = {
+    type: 'red',
+    HP: 3,
+};
+const yellow = {
+    type: 'yellow',
+    HP: 6,
+};
+
+const goblinDamages = [0, 0, 0, 1, 2, 3, 3, 3, 3, 4, 4, 5];
+const playerDamages = [0, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 5];
+// const villianTypes [green, green, red, red, red, red, red, blue, blue, yellow];
 
 /* Display Functions */
 function displayDamage() {
@@ -44,13 +65,47 @@ function displayDefeatedGoblin() {
 }
 
 function displayGoblins() {
+    goblinList.innerHTML = '';
+
     for (const goblin of goblins) {
         const goblinEl = renderGoblin(goblin);
-        goblinArea.append(goblinEl);
+        goblinList.append(goblinEl);
+
+        goblinEl.addEventListener('click', () => {
+            if (goblin.HP < 1) {
+                result = `You're hitting a dead goblin. That's just wrong`;
+                // displayResult();
+            }
+            const playerDamage = getRandomItem(playerDamages);
+            const goblinDamage = getRandomItem(goblinDamages);
+
+            player.HP = Math.max(0, player.HP - goblinDamage);
+            goblin.HP = Math.max(0, goblin.HP - playerDamage);
+
+            result = '';
+            if (playerDamage === 0) {
+                result += 'Missed this time. ';
+            } else {
+                result += `You hit ${goblin.name} and did ${playerDamage} in damage`;
+            }
+            if (goblinDamage === 0) {
+                result += `${goblin.name} missed you`;
+            } else {
+                result += ` Ooch! ${goblin.name} hit you and did ${goblinDamage} in damage`;
+            }
+
+            if (goblin.HP < 1) {
+                defeated++;
+                // displayScoreboard();
+            }
+            // displayResult();
+        });
     }
 }
 displayGoblins();
 displayDamage();
 displayDefeatedGoblin();
+// displayScoreboard();
+// displayResult();
 
 // (don't forget to call any display functions you want to run on page load!)
