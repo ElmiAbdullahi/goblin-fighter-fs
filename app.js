@@ -4,8 +4,6 @@ import { getRandomItem } from './fetch-utils.js';
 
 /* Get DOM Elements */
 
-const goblinArea = document.getElementById('goblin-area');
-
 const addGoblinForm = document.getElementById('add-goblin-form');
 const playerHP = document.getElementById('player-hp');
 
@@ -17,11 +15,10 @@ const removeDeadGoblinsBtn = document.getElementById('remove-dead-goblins');
 const resultDisplay = document.getElementById('result-display');
 const playerCardImg = document.getElementById('display-player');
 
-const defeatGoblin = document.getElementById('defeated-goblins');
 const damageDone = document.getElementById('damage-done');
 
 /* State */
-let message = '';
+// let message = '';
 let result = '';
 let player = { HP: 23 };
 
@@ -75,6 +72,16 @@ addGoblinForm.addEventListener('submit', (e) => {
     displayResult();
 
     addGoblinForm.reset();
+});
+
+removeDeadGoblinsBtn.addEventListener('click', () => {
+    const alive = [];
+
+    for (const goblin of goblins) {
+        if (goblin.HP > 0) alive.push(goblin);
+    }
+    goblins = alive;
+    displayGoblins();
 });
 
 function displayDamage() {
