@@ -13,6 +13,7 @@ const goblinList = document.getElementById('goblin-list');
 const removeDeadGoblinsBtn = document.getElementById('remove-dead-goblins');
 
 const resultDisplay = document.getElementById('result-display');
+const playerCardImg = document.getElementById('display-player');
 
 const defeatGoblin = document.getElementById('defeated-goblins');
 const damageDone = document.getElementById('damage-done');
@@ -20,7 +21,7 @@ const damageDone = document.getElementById('damage-done');
 /* State */
 let message = '';
 let result = '';
-let player = { HP: 16 };
+let player = { HP: 23 };
 
 let goblins = [
     { name: 'Lex', HP: 7, type: 'ghoul' },
@@ -63,7 +64,16 @@ function displayDamage() {
     }
 }
 function displayDefeatedGoblin() {
-    defeatGoblin.textContent = `you have defeated ${defeated} goblins`;
+    resultDisplay.textContent = `you have defeated ${defeated} goblins`;
+}
+
+function displayPlayer() {
+    playerHP.textContent = player.HP;
+    if (player.HP < 1) {
+        playerCardImg.src = '/assets/tombstone.png';
+    } else {
+        playerCardImg.src = './assets/superhero.png';
+    }
 }
 
 function displayResult() {
@@ -80,6 +90,7 @@ function displayGoblins() {
             if (goblin.HP < 1) {
                 result = `You're hitting a dead goblin. That's just wrong`;
                 displayResult();
+                return;
             }
             const playerDamage = getRandomItem(playerDamages);
             const goblinDamage = getRandomItem(goblinDamages);
@@ -101,16 +112,20 @@ function displayGoblins() {
 
             if (goblin.HP < 1) {
                 defeated++;
+                displayDefeatedGoblin();
                 // displayScoreboard();
             }
             displayResult();
             displayGoblins();
+            displayPlayer();
         });
     }
 }
 displayGoblins();
+displayPlayer();
 displayDamage();
 displayDefeatedGoblin();
+
 // displayScoreboard();
 // displayResult();
 
